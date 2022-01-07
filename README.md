@@ -51,7 +51,7 @@ group_9_mlops/
 
 ## Creators
 
-**Samy Tessier**
+**the big man :necktie: **
 
 - <https://github.com/samytessier>
 
@@ -60,7 +60,7 @@ group_9_mlops/
 - <https://github.com/TheJProject>
 
 
-**didier**  <img src="https://ih1.redbubble.net/image.805943027.3203/st,small,507x507-pad,600x600,f8f8f8.u1.jpg" alt="didier" height="35" width ="35">
+**didier with a 'p'**  <img src="https://ih1.redbubble.net/image.805943027.3203/st,small,507x507-pad,600x600,f8f8f8.u1.jpg" alt="didier" height="35" width ="35">
 
 - <https://github.com/paulseghers>
 
@@ -73,3 +73,4 @@ Code and documentation copyright 2011-2018 the authors. Code released under the 
 ## Future ref
 <https://huggingface.co/docs/transformers/training>
 <https://www.kaggle.com/muonneutrino/sentiment-analysis-with-amazon-reviews/notebook>
+<https://en.wikipedia.org/wiki/The_Transformers_(TV_series)>
