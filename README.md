@@ -55,7 +55,7 @@ group_9_mlops/
 
 - <https://github.com/samytessier>
 
-**The "J" project (project to be announced at a later date)**
+**The "J" project **(project to be announced at a later date)**
 
 - <https://github.com/TheJProject>
 
