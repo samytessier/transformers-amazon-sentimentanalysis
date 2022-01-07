@@ -36,7 +36,7 @@ The amazon review data of a few million text rows is sourced from [Kaggle](https
 
 Transformers pre-trained models have been proven to be very quick and effective for some cursory sentiment analysis. [This short post](https://towardsdatascience.com/sentiment-analysis-with-pretrained-transformers-using-pytorch-420bbc1a48cd) highlights how we can let Transformers do the logic from the back-end, however we also have the option to select a specific pre-trained model. 
 
-A good starting point would be the [bert-base-uncased](https://huggingface.co/bert-base-uncased) model, which is a good reference point accuracy-wise for our model that we can then improve on.
+A good starting point would be the [bert-base-uncased](https://huggingface.co/bert-base-uncased) TNN model, which is a good reference point accuracy-wise for our model that we can then improve on.
 
 ## Structure
 
