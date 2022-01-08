@@ -105,6 +105,8 @@ Project Organization
 
 - <https://github.com/paulseghers>
 
+## TODO (non-obvious things we might forget)
+- auto dowload the `.bz2` from kaggle with wget into `data/raw`
 
 ## Copyright and license
 
