@@ -107,7 +107,8 @@ Project Organization
 
 ## TODO (non-obvious things we might forget)
 - auto dowload the `.bz2` from kaggle with wget into `data/raw`
-
+- create wrapper functions for code blocks that might be used twice
+- add docstrings to wrapper functions for better documentability of what's going on
 ## Copyright and license
 
 

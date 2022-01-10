@@ -12,6 +12,18 @@ from torchtext.vocab import FastText, voca
 bimport torch
 #from torchtext.vocab import GloVe
 
+"""
+file with methods to:
+    - import .bz2 datasets
+    - extract texts
+    - normalize texts
+    - tokenize, embed, create vectors shaped for CNN
+    - create DataLoaders
+    
+currently they are still barebones and some would benefit to be wrapped in functions
+"""
+
+
 ##############################
 #    read raw gros bizou2    #
 ##############################
