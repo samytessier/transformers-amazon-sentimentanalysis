@@ -125,5 +125,6 @@ def amzreview_dataset() -> (DataLoader, DataLoader):
     test = DataLoader(test_data[:-cutoff_test], shuffle=True, batch_size=batch_size)
     return train, test
 
-#amzreview_dataset()
+amzreview_dataset()
+print('Successfully run !!! ')
 
