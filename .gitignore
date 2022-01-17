@@ -94,3 +94,6 @@ target/
 #vector cache
 .vector_cache
 
+#checkpoint model
+notebooks/checkpoint-6000/
+
