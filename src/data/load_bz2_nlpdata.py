@@ -1,4 +1,5 @@
 import bz2
+import os
 import os.path
 import numpy as np
 import re
@@ -10,11 +11,17 @@ from torch.utils.data import DataLoader
 from torch.nn.utils.rnn import pad_sequence, pack_padded_sequence
 from torchtext.vocab import FastText, vocab
 import torch
+from transformers import AutoTokenizer
+
+
 #from torchtext.vocab import GloVe
 
-##############################
-#    read raw gros bizou2    #
-##############################
+##########################
+#    read raw  bizou2    #
+##########################
+
+
+#print("when enetering chungus we're in: \n",os.getcwd())
 
 def get_labels_and_texts(file) -> "np.array":
     """
@@ -49,15 +56,15 @@ def normalize_texts(texts):
     return normalized_texts
 
 
-def amzreview_dataset() -> (DataLoader, DataLoader):
+def amzreview_dataset(fpath) -> (DataLoader, DataLoader):
     """
     reads files from /data/raw with appropriate method 
     applies normalization and tokenization
     merges processed texts with their labels into 
     torch.utils.data DataLoader object for train and test sets
     """
-    train_labels, train_texts = get_labels_and_texts('data/raw/train.ft.txt.bz2')
-    test_labels, test_texts = get_labels_and_texts('data/raw/test.ft.txt.bz2')
+    train_labels, train_texts = get_labels_and_texts(fpath)#'data/raw/test.ft.txt.bz2')
+    test_labels, test_texts = get_labels_and_texts(fpath)#'data/raw/test.ft.txt.bz2')
 
     train_texts = normalize_texts(train_texts)
     test_texts = normalize_texts(test_texts)
@@ -69,6 +76,7 @@ def amzreview_dataset() -> (DataLoader, DataLoader):
     #    tokenize      # (already normalized by hand above)
     ####################
     Tokenizer = get_tokenizer(None) #maybe look into tokenizination libraries (spacy, etc) 
+    #Tokenizer = AutoTokenizer.from_pretrained('bert-base-cased')
     train_texts_tok = [Tokenizer(t) for t in train_texts]
     test_texts_tok  = [Tokenizer(t) for t in test_texts]
     #we need to store the tokenized texts anyways 
@@ -121,10 +129,10 @@ def amzreview_dataset() -> (DataLoader, DataLoader):
     #   dataloader    #
     ###################
 
+    #print("train data: ",type(train_data))
+
     train = DataLoader(train_data[:-cutoff_train], shuffle=True, batch_size=batch_size)
     test = DataLoader(test_data[:-cutoff_test], shuffle=True, batch_size=batch_size)
+    print("data successfully loaded\n") 
     return train, test
-
-amzreview_dataset()
-print('Successfully run !!! ')
 
