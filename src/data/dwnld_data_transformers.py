@@ -12,19 +12,16 @@ from dotenv import find_dotenv, load_dotenv
 @click.option('--size_val', required=True, type=int)
 @click.argument('output_filepath', type=click.Path())
 def main(size_train, size_val, output_filepath):
-    """ Runs data processing scripts to turn raw data from (../raw) into
-        cleaned data ready to be analyzed (saved in ../processed).
+    """ Download dataset from transformers into
+         data ready to be processed (saved in ../raw).
     """
     logger = logging.getLogger(__name__)
     logger.info('making data set from transformers data')
     dataset = load_dataset('amazon_polarity')
     train_dataset = dataset["train"].shuffle(seed=42).select(range(size_train)) 
-    eval_dataset = dataset["test"].shuffle(seed=42).select(range(size_val)) 
+    eval_dataset = dataset["test"].shuffle(seed=42).select(range(size_val))
     train_dataset.save_to_disk(output_filepath + '/train_dataset_size_%s' % size_train)
     eval_dataset.save_to_disk(output_filepath + '/eval_dataset_size_%s' % size_val)
-
-def tokenize_function(examples):
-    return tokenizer(examples["content"], padding="max_length", truncation=True)
 
 
 if __name__ == '__main__':

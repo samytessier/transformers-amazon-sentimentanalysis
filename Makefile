@@ -25,9 +25,13 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
+## Download Dataset
+data_dwnld: requirements
+	$(PYTHON_INTERPRETER) src/data/dwnld_data_transformers.py --size_train=2000 --size_val=100 data/raw
+
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) src/data/load_data_transformers.py --size_train=1000 --size_val=10 data/processed
+	$(PYTHON_INTERPRETER) src/data/process_data_transformers.py --size_train=2000 --size_val=100 data/raw data/processed
 
 ## Delete all compiled Python files
 clean:
