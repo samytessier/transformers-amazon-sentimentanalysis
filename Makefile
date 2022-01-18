@@ -27,7 +27,7 @@ requirements: test_environment
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py data/raw data/processed
+	$(PYTHON_INTERPRETER) src/data/load_data_transformers.py --size_train=1000 --size_val=10 data/processed
 
 ## Delete all compiled Python files
 clean:
