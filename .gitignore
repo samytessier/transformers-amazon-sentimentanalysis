@@ -77,7 +77,10 @@ target/
 
 # exclude data from source control by default
 /data/
-/
+
+# exclude all the poo poo logs and stuff hydra writes
+outputs/
+
 # exclude .bz2 in case someone puts them in the wrong place >:(
 *.bz2
 
