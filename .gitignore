@@ -76,7 +76,7 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-/data/
+#/data/
 
 # exclude all the poo poo logs and stuff hydra writes
 outputs/
@@ -99,3 +99,4 @@ outputs/
 
 #checkpoint model
 notebooks/checkpoint-6000/
+/data
