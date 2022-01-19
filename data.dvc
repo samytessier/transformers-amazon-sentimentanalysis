@@ -2,4 +2,4 @@ outs:
 - md5: 67b0dd7a4776352c67fbe32c3507b2b2.dir
   size: 516929648
   nfiles: 2
-  path: data
+  path: data/
