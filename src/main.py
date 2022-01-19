@@ -23,7 +23,7 @@ def train(C):
     log.info("Training homemade CNN classifier...")
     
     model = CNNclassifier()
-    train_set, _ = amzreview_dataset(get_original_cwd()+'/data/raw/test.ft.txt.bz2') 
+    train_set, _ = amzreview_dataset(get_original_cwd()+'/src/data/raw/test.ft.txt.bz2') 
     
     try:
         criterion = getattr(torch.nn, cfg.criterion)()
@@ -36,7 +36,6 @@ def train(C):
     #training loop:
 
     for epoch in range(cfg.hyperparameters.epochs):
-        model.train()
         loss = 0
         for images, labels in train_set: #gradients, update weights on
         # -this observation
@@ -51,8 +50,8 @@ def train(C):
         log.info("Epoch: {}, Loss: {}".format(epoch, loss))
         #print("Epoch: {}, Loss: {}".format(epoch, loss))
     print("final loss: {}".format(loss))    
-    torch.save(model, 'models/CNN_classifier.pt') #[COFIG] put in configfile
-    print("sucesfully trained & saved model at model/CNN_classifier.pt")
+    torch.save(model, get_original_cwd() + '/src/models/CNN_classifier.pt') #[COFIG] put in configfile
+    print("saved model at model/CNN_classifier.pt")
 
   
 def evaluate(C):
