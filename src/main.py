@@ -23,7 +23,7 @@ def train(C):
     log.info("Training homemade CNN classifier...")
     
     model = CNNclassifier()
-    train_set, _ = amzreview_dataset(get_original_cwd()+'/src/data/raw/test.ft.txt.bz2') 
+    train_set, _ = amzreview_dataset(get_original_cwd()+'/data/raw/test.ft.txt.bz2') 
     
     try:
         criterion = getattr(torch.nn, cfg.criterion)()

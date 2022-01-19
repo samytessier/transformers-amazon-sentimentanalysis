@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.7-slim
+FROM python:3.8-slim
 
 # install python 
 RUN apt update && \
@@ -15,4 +15,4 @@ COPY data/ data/
 WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 
-ENTRYPOINT ["python", "-u", "src/data/load_bz2_nlpdata.py"]
+ENTRYPOINT ["python", "-u", "src/main.py"]
