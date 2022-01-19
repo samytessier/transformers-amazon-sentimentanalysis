@@ -33,6 +33,14 @@ data_dwnld: requirements
 data: requirements
 	$(PYTHON_INTERPRETER) src/data/process_data_transformers.py --size_train=2000 --size_val=100 data/raw data/processed
 
+## Train
+train: requirements
+	$(PYTHON_INTERPRETER) src/models/train_transformers.py data/processed models --size_train=2000 --size_val=100
+
+## Train
+predict: requirements
+	$(PYTHON_INTERPRETER) src/models/predict_transformers.py data/processed models --size_train=2000 --size_val=100
+
 ## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete
