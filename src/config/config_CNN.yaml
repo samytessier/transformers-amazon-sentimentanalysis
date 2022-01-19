@@ -1,0 +1,17 @@
+### general stuff ###
+
+use_gpu: False
+command: "train"
+
+### config for training ###
+train:
+  hyperparameters:
+    lr: 0.1
+    epochs: 24
+    batch_size: 64
+  criterion: "BCELoss" #must be named exactly as in torch.nn.
+  save_path: "models/CNN_classifier.pt"
+
+### config for Evaluation ###
+evaluate:
+  verbose: True

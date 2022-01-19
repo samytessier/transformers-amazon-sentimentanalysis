@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # local package
 -e .
 
@@ -14,3 +15,15 @@ setuptools==47.1.0
 torch==1.10.1
 torchtext==0.11.1
 
+=======
+click==7.1.2
+datasets==1.17.0
+hydra-core==1.1.1
+numpy==1.19.1
+omegaconf==2.1.1
+python-dotenv==0.19.2
+setuptools==47.1.0
+torch==1.10.1
+torchtext==0.11.1
+transformers==4.15.0
+>>>>>>> d40f8877301d07953316a013e22163936b2668e5
