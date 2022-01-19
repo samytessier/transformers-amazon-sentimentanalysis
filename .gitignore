@@ -81,8 +81,6 @@ target/
 # exclude all the poo poo logs and stuff hydra writes
 outputs/
 
-# exclude .bz2 in case someone puts them in the wrong place >:(
-*.bz2
 
 # Mac OS-specific storage files
 .DS_Store
@@ -99,4 +97,6 @@ outputs/
 
 #checkpoint model
 notebooks/checkpoint-6000/
+
+data/
 /data
