@@ -98,5 +98,6 @@ outputs/
 #checkpoint model
 notebooks/checkpoint-6000/
 
-data/
+/data/*
+!data/*.dvc
 /data
