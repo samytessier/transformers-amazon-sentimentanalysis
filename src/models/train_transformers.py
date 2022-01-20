@@ -15,11 +15,17 @@ import wandb
 def train_transformer(C):
     cfg = C.train_transformer
     og_fpath = get_original_cwd()
-    input_filepath, output_filepath, size_train, size_val = og_fpath+cfg.input_filepath,\
-     og_fpath+cfg.output_filepath,\
-     cfg.size_train,\
-     cfg.size_val
-    wandb.init(project='huggingface',entity='TheJproject')
+    input_filepath, output_filepath = og_fpath+cfg.input_filepath,\
+     og_fpath+cfg.output_filepath
+
+    size_val = C.common.size_val if C.same_data_size_everywhere else cfg.size_val
+    size_train = C.common.size_train if C.same_data_size_everywhere else cfg.size_train
+    try:
+        wandb.init(project='huggingface',entity='TheJproject')
+        use_wandb = True
+    except AssertionError:
+        use_wandb = False
+
     print("Training transformers day and night")
     train_dataset = load_from_disk(input_filepath + '/train_processed_size_%s' % size_train)
     eval_dataset = load_from_disk(input_filepath + '/eval_processed_size_%s' % size_val)
@@ -27,8 +33,12 @@ def train_transformer(C):
     # TODO: Implement training loop here
     model = AutoModelForSequenceClassification.from_pretrained("bert-base-cased", num_labels=2 )
 
+    report_to="none"
+    if use_wandb:
+        report_to="wandb"
+
     training_args = TrainingArguments("test_trainer",
-        report_to="wandb",  # enable logging to W&B
+        report_to=report_to,  # enable logging to W&B
         run_name="bert-test"  # name of the W&B run (optional)
         )
     trainer = Trainer(

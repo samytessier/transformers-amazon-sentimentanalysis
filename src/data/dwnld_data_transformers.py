@@ -12,8 +12,11 @@ def run_download(C):
     """
     original_path = get_original_cwd()
     cfg = C.run_download
-    size_train, size_val, output_filepath = cfg.size_train, cfg.size_val, cfg.output_filepath
+    output_filepath = cfg.output_filepath
     
+    size_val = C.common.size_val if C.same_data_size_everywhere else cfg.size_val
+    size_train = C.common.size_train if C.same_data_size_everywhere else cfg.size_train
+
     logger = logging.getLogger(__name__)
     logger.info("params ok. download starting...")
     #call data part now

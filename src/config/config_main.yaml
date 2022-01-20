@@ -5,7 +5,7 @@ use_gpu: False
 save_path: "/models/mnist_classifier.pt" #given wrp to /src
 same_data_size_everywhere: True #
 
-common_sizes:
+common:
   size_train: 70
   size_val: 30
 ### config for training ###
@@ -54,6 +54,6 @@ process_data:
 
 ### config for making dataset ###
 run_download:
-  size_train: 50
-  size_val: 10
+  size_train: 70
+  size_val: 30
   output_filepath: "/data/raw"

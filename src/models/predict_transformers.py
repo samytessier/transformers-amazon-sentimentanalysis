@@ -18,11 +18,13 @@ from transformers import AutoTokenizer
 
 def eval_transformer(C):
     print("Predict day and night")
+    og_fpath = get_original_cwd()
     cfg = C.eval_transformer
-    data_filepath, model_filepath, size_train, size_val = og_fpath+cfg.data_filepath,\
-     og_fpath+cfg.model_filepath,\
-     cfg.size_train,\
-     cfg.size_val
+    data_filepath, model_filepath = og_fpath+cfg.data_filepath,\
+     og_fpath+cfg.model_filepath
+     
+    size_val = C.common.size_val if C.same_data_size_everywhere else cfg.size_val
+    size_train = C.common.size_train if C.same_data_size_everywhere else cfg.size_train
 
     train_dataset = load_from_disk(data_filepath + '/train_processed_size_%s' % size_train)
     eval_dataset = load_from_disk(data_filepath + '/eval_processed_size_%s' % size_val)

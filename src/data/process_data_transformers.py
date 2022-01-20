@@ -13,10 +13,13 @@ def process_data(C):
     """
     og_fpath = get_original_cwd()
     cfg = C.process_data
-    size_train, size_val, input_filepath, output_filepath = cfg.size_train,\
-     cfg.size_val,\
-     og_fpath+cfg.input_filepath,\
+
+    size_val = C.common.size_val if C.same_data_size_everywhere else cfg.size_val
+    size_train = C.common.size_train if C.same_data_size_everywhere else cfg.size_train
+
+    input_filepath, output_filepath = og_fpath+cfg.input_filepath,\
      og_fpath+cfg.output_filepath
+
     logger = logging.getLogger(__name__)
     logger.info('Tokenize data set from transformers data')
 
@@ -32,6 +35,8 @@ def process_data(C):
     
     tokenized_train_dataset.save_to_disk(output_filepath + '/train_processed_size_%s' % size_train)
     tokenized_eval_dataset.save_to_disk(output_filepath + '/eval_processed_size_%s' % size_val)
+
+    logger.info("\n successfuly processed data to {}".format(cfg.output_filepath))
 
 def tokenize_function(examples):
     tokenizer = AutoTokenizer.from_pretrained('bert-base-cased')
