@@ -21,7 +21,7 @@ def train_transformer(C):
     size_val = C.common.size_val if C.same_data_size_everywhere else cfg.size_val
     size_train = C.common.size_train if C.same_data_size_everywhere else cfg.size_train
     try:
-        wandb.init(project='huggingface',entity='TheJproject')
+        wandb.init(project='trial-run',entity='mlops-group9')
         use_wandb = True
     except AssertionError:
         use_wandb = False

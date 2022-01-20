@@ -30,7 +30,7 @@ def eval_transformer(C):
     eval_dataset = load_from_disk(data_filepath + '/eval_processed_size_%s' % size_val)
 
     print("config ok, setting up W&B...")
-    wandb.init(project='huggingface',entity='TheJproject')
+    wandb.init(project='trial-run',entity='mlops-group9')
 
     model = AutoModelForSequenceClassification.from_pretrained(model_filepath + '/checkpoint-6000',local_files_only=True)
     training_args = TrainingArguments("test_trainer",
