@@ -18,7 +18,9 @@ evaluate:
 
 ### config for training huggingface ###
 
-### config for loading data ###
+### config for predicting huggingface ###
+
+### config for loading processed data ###
 
 ### config for making dataset ###
 
