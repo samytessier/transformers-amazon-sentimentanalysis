@@ -26,20 +26,19 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
 ## Download Dataset
-data_dwnld: requirements
-	$(PYTHON_INTERPRETER) src/data/dwnld_data_transformers.py --size_train=2000 --size_val=100 data/raw
+data_download:
+	$(PYTHON_INTERPRETER) src/main.py command=run_download
 
 ## Make Dataset
-data: requirements
-	$(PYTHON_INTERPRETER) src/data/process_data_transformers.py --size_train=2000 --size_val=100 data/raw data/processed
+data:
+	$(PYTHON_INTERPRETER) src/main.py command=process_data
 
 ## Train
-train: requirements
-	$(PYTHON_INTERPRETER) src/models/train_transformers.py data/processed models --size_train=2000 --size_val=100
-
+train: 
+	$(PYTHON_INTERPRETER) src/main.py command=train_transformer
 ## Train
-predict: requirements
-	$(PYTHON_INTERPRETER) src/models/predict_transformers.py data/processed models --size_train=2000 --size_val=100
+evaluate:
+	$(PYTHON_INTERPRETER) src/main.py command=eval_transformer
 
 ## Delete all compiled Python files
 clean:

@@ -12,22 +12,14 @@ from dotenv import find_dotenv, load_dotenv
 import wandb
 wandb.init(project='huggingface',entity='TheJproject')
 
-
-
-@click.command()
-@click.option('--size_train', required=True, type=int)
-@click.option('--size_val', required=True, type=int)
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath, size_train, size_val):
+def train_transformer(C):
+    cfg = C.train_transformer
+    og_fpath = get_original_cwd()
+    input_filepath, output_filepath, size_train, size_val = og_fpath+cfg.input_filepath,\
+     og_fpath+cfg.output_filepath,\
+     cfg.size_train,\
+     cfg.size_val
     print("Training transformers day and night")
-    #parser = argparse.ArgumentParser(description='Training arguments')
-    #parser.add_argument('--lr', default=0.1)
-    # add any additional argument that you want
-    #args = parser.parse_args(sys.argv[2:])
-    #print(args)
-    
-    #path
     train_dataset = load_from_disk(input_filepath + '/train_processed_size_%s' % size_train)
     eval_dataset = load_from_disk(input_filepath + '/eval_processed_size_%s' % size_val)
 
@@ -44,7 +36,6 @@ def main(input_filepath, output_filepath, size_train, size_val):
     trainer.train()
     trainer.save_model(output_filepath + 'trained_model')
 
-print("\n made it here you can cut now\n")
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_fmt)

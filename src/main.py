@@ -9,6 +9,10 @@ import torch
 from data.load_bz2_nlpdata import amzreview_dataset
 from models.cnn_model import CNNclassifier
 #from checkpoint_mgmt import load_checkpoint, save_checkpoint
+from data.dwnld_data_transformers import run_download
+from data.process_data_transformers import process_data
+from models.train_transformers import train_transformer
+from models.predict_transformers import eval_transformer
 
 import hydra
 from hydra.utils import get_original_cwd
@@ -17,7 +21,28 @@ from omegaconf import OmegaConf
 
 log = logging.getLogger(__name__)
 
-def train(C):
+@hydra.main(config_path="config", config_name='config_main.yaml')
+def main(cfg):
+    """ Helper class that will to launch train and test functions
+    expects there to be a "command" field in the config file
+    """
+    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    logging.basicConfig(level=logging.INFO, format=log_fmt)
+    try: 
+        globals()[cfg.command]
+    except AttributeError:
+        print('Unrecognized command \'{}\''.format(cfg.command))
+        exit(1)
+    globals()[cfg.command](cfg)
+    #log = logging.getLogger(__name__)
+    #print("log, config: ", self.log, " ", self.config)
+    #only needed here, as we can't execute a train then a test in a single run
+
+
+#####################################
+#    POO-POO ugly functions below   #
+#####################################
+def train_cnn(C):
     cfg =  C.train
     print("workdir in train: ", os.getcwd(), "\n")
     log.info("Training homemade CNN classifier...")
@@ -75,26 +100,11 @@ def evaluate(C):
 
     log.info('Accuracy of classifier: {}%'.format(accuracy*100))
 
-@hydra.main(config_path="config", config_name='config_CNN.yaml')
-def main(cfg):
-    """ Helper class that will to launch train and test functions
-    expects there to be a "command" field in the config file
-    """
-    try: 
-        globals()[cfg.command]
-    except AttributeError:
-        print('Unrecognized command \'{}\''.format(cfg.command))
-        exit(1)
-    globals()[cfg.command](cfg)
-    #log = logging.getLogger(__name__)
-    #print("log, config: ", self.log, " ", self.config)
-    #only needed here, as we can't execute a train then a test in a single run
 
 if __name__ == '__main__':
     main()
 
-    
-    
+
     
     
     

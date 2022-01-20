@@ -1,9 +1,9 @@
-from pytorch_lightning import LightningModule
+#from pytorch_lightning import LightningModule
 from torch import nn
 import torch.nn.functional as F
 import torch.optim as optim
 
-class CNNclassifier(LightningModule):
+class CNNclassifier(nn.Module):
     def __init__(self):
         #super().__init__()
         super(CNNclassifier, self).__init__() #dim of embedding vectors returned by fasttext: 300

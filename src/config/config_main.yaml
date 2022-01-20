@@ -1,7 +1,22 @@
 ### general stuff ###
 
+command: "run_download"
 use_gpu: False
-command: "train"
+save_path: "/models/mnist_classifier.pt" #given wrp to /src
+same_data_size_everywhere: True #
+
+common_sizes:
+  size_train: 70
+  size_val: 30
+### config for training ###
+train:
+  hyperparameters:
+    lr: 0.004
+    epochs: 24
+    batch_size: 64
+  criterion: "NLLLoss" #must be named exactly as in torch.nn.
+  optimizer: "Adam"
+  save_path: ${save_path} 
 
 ### config for training cnn###
 train_cnn:
@@ -17,10 +32,28 @@ evaluate:
   verbose: True
 
 ### config for training huggingface ###
+train_transformer:
+ input_filepath: /data/processed
+ output_filepath: /models
+ size_train: 70
+ size_val: 30
 
 ### config for predicting huggingface ###
+eval_transformer:
+  data_filepath: "/data/processed"
+  model_filepath: "/models"
+  size_train: 70
+  size_val: 30
 
 ### config for loading processed data ###
+process_data:
+  size_train: 70
+  size_val: 30
+  input_filepath: "/data/raw"
+  output_filepath: "/data/processed"
 
 ### config for making dataset ###
-
+run_download:
+  size_train: 50
+  size_val: 10
+  output_filepath: "/data/raw"
