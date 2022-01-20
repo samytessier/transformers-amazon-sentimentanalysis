@@ -16,8 +16,6 @@ from transformers import DataCollatorWithPadding
 from transformers import AutoTokenizer
 
 
-wandb.init(project='huggingface',entity='TheJproject')
-
 def eval_transformer(C):
     print("Predict day and night")
     cfg = C.eval_transformer
@@ -25,8 +23,12 @@ def eval_transformer(C):
      og_fpath+cfg.model_filepath,\
      cfg.size_train,\
      cfg.size_val
+
     train_dataset = load_from_disk(data_filepath + '/train_processed_size_%s' % size_train)
     eval_dataset = load_from_disk(data_filepath + '/eval_processed_size_%s' % size_val)
+
+    print("config ok, setting up W&B...")
+    wandb.init(project='huggingface',entity='TheJproject')
 
     model = AutoModelForSequenceClassification.from_pretrained(model_filepath + '/checkpoint-6000',local_files_only=True)
     training_args = TrainingArguments("test_trainer",

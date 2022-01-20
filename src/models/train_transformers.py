@@ -10,7 +10,6 @@ import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 import wandb
-wandb.init(project='huggingface',entity='TheJproject')
 
 def train_transformer(C):
     cfg = C.train_transformer
@@ -19,6 +18,7 @@ def train_transformer(C):
      og_fpath+cfg.output_filepath,\
      cfg.size_train,\
      cfg.size_val
+    wandb.init(project='huggingface',entity='TheJproject')
     print("Training transformers day and night")
     train_dataset = load_from_disk(input_filepath + '/train_processed_size_%s' % size_train)
     eval_dataset = load_from_disk(input_filepath + '/eval_processed_size_%s' % size_val)
