@@ -3,7 +3,7 @@ from datasets import load_dataset, load_metric
 from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
                           Trainer, TrainingArguments)
 wandb.login()
-wandb.init(project='hypper_param_test',entity='TheJproject')
+wandb.init(project='first-run',entity='mlops-group9')
 
 metric = load_metric('glue', 'mrpc')
 dataset = load_dataset('amazon_polarity')
@@ -49,5 +49,5 @@ trainer.hyperparameter_search(
     direction="maximize", 
     backend="ray", 
     n_trials=3,
-    resources_per_trial={"cpu": 4} # number of trials
+    resources_per_trial={"cpu": 8} # number of trials
 )

@@ -2,7 +2,7 @@ import numpy as np
 from datasets import load_dataset
 from datasets import IterableDataset
 #from datasets.IterableDataset import shuffle
-from transformers import AutoTokenizer
+from transformers import AutoTokenizer, TrainingArguments, Trainer
 from transformers import AutoModelForSequenceClassification
 
 from torch.optim import Adam
