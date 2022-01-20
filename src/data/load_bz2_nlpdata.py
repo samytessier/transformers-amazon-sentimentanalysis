@@ -12,7 +12,8 @@ from torch.nn.utils.rnn import pad_sequence, pack_padded_sequence
 from torchtext.vocab import FastText, vocab
 import torch
 from transformers import AutoTokenizer
-
+import multiprocessing
+num_workers = multiprocessing.cpu_count()
 
 #from torchtext.vocab import GloVe
 
@@ -56,7 +57,7 @@ def normalize_texts(texts):
     return normalized_texts
 
 
-def amzreview_dataset(fpath) -> (DataLoader, DataLoader):
+def amzreview_dataset(fpath):
     """
     reads files from /data/raw with appropriate method 
     applies normalization and tokenization
@@ -131,8 +132,8 @@ def amzreview_dataset(fpath) -> (DataLoader, DataLoader):
 
     #print("train data: ",type(train_data))
 
-    train = DataLoader(train_data[:-cutoff_train], shuffle=True, batch_size=batch_size)
-    test = DataLoader(test_data[:-cutoff_test], shuffle=True, batch_size=batch_size)
+    train = DataLoader(train_data[:-cutoff_train], shuffle=True, batch_size=batch_size, num_workers=num_workers)
+    test = DataLoader(test_data[:-cutoff_test], shuffle=True, batch_size=batch_size, num_workers=num_workers)
     print("data successfully loaded\n") 
     return train, test
 
