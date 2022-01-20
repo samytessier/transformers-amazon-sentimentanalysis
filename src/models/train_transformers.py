@@ -20,7 +20,7 @@ wandb.init(project='huggingface',entity='TheJproject')
 @click.argument('input_filepath', type=click.Path(exists=True))
 @click.argument('output_filepath', type=click.Path())
 def main(input_filepath, output_filepath, size_train, size_val):
-    print("Training day and night")
+    print("Training transformers day and night")
     #parser = argparse.ArgumentParser(description='Training arguments')
     #parser.add_argument('--lr', default=0.1)
     # add any additional argument that you want
@@ -44,7 +44,7 @@ def main(input_filepath, output_filepath, size_train, size_val):
     trainer.train()
     trainer.save_model(output_filepath + 'trained_model')
 
-
+print("\n made it here you can cut now\n")
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_fmt)

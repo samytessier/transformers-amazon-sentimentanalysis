@@ -13,8 +13,8 @@ RUN rm -rf .gitignore
 COPY requirements.txt requirements.txt
 COPY setup.py setup.py
 COPY src/ src/
-COPY data/ data/
-#COPY models/ models/ (to uncomment later)
+#COPY data/ data/ #we don't push data to git
+COPY models/ models/ (to uncomment later)
 
 RUN pip install -r requirements.txt --no-cache-dir
 
