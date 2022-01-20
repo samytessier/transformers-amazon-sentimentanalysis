@@ -20,7 +20,11 @@ def run_download(C):
     logger = logging.getLogger(__name__)
     logger.info("params ok. download starting...")
     #call data part now
-    dataset = load_dataset('amazon_polarity')
+    try:
+        dataset = load_dataset('amazon_polarity')
+    except NonMatchingChecksumError:
+        dataset = load_dataset('amazon_polarity', download_mode='force_redownload')
+        
     train_dataset = dataset["train"].shuffle(seed=42).select(range(size_train)) 
     eval_dataset = dataset["test"].shuffle(seed=42).select(range(size_val))
 

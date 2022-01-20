@@ -101,3 +101,5 @@ notebooks/checkpoint-6000/
 /data/*
 !data/*.dvc
 /data
+
+/wandb
