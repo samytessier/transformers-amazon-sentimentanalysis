@@ -29,7 +29,8 @@ def process_data(C):
     except FileNotFoundError:
         print("file not found - has make data_download been run already? \n check logs for more info")
         logger.error("aborted because file not found. likely because `make data_download` has not yet been run or bad path and sizes provided")
-    
+        logger.error("exiting")
+        exit(1)
     tokenized_train_dataset = train_dataset.map(tokenize_function, batched=True)
     tokenized_eval_dataset = eval_dataset.map(tokenize_function, batched=True)
     
