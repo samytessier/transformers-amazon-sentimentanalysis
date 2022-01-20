@@ -39,6 +39,37 @@ Transformers pre-trained models have been proven to be very quick and effective 
 A good starting point would be the [bert-base-uncased](https://huggingface.co/bert-base-uncased) model, which is a good reference point accuracy-wise for our model that we can then improve on.
 
 
+## Running the project
+
+
+making the data for the first time
+
+    make data_download 
+
+remaking data if already downloaded
+
+    make data  
+
+training the model:
+
+    make train  
+
+will train the model and save it in `models/cnn_classifier` or `models/transformer`
+depending on the arguments in the config file [todo]
+
+if a model is saved in those locations, running the evaluation loop:
+
+    make evaluate  
+
+will evaluate this models accuracy on a seperate evaluation set it hasn't seen before.<br>
+Things like hyperparamters, save locations, the type of model you want to use, or the size of the sets you're loading and creating can be modified in the file `src/config/config_main.yaml`<br>
+
+you can also perform a sanity check on data and model by running [NOT YET IMPLEMENTED!!]
+
+    pytest  
+
+have fun
+
 Project Organization
 ------------
 
@@ -92,23 +123,24 @@ Project Organization
 
 ## Creators
 
-**the big man :necktie: **
+**the big man** :necktie: (s213459)
 
-- <https://github.com/samytessier>
+- <https://github.com/samytessier> 
 
-**The "J" project (project to be announced at a later date)**
+**The "J" project (project to be announced at a later date)** (s210158)
 
 - <https://github.com/TheJProject>
 
-
-**didier with a 'p'**  <img src="https://ih1.redbubble.net/image.805943027.3203/st,small,507x507-pad,600x600,f8f8f8.u1.jpg" alt="didier" height="35" width ="35">
+**didier with a 'p'**  <img src="https://ih1.redbubble.net/image.805943027.3203/st,small,507x507-pad,600x600,f8f8f8.u1.jpg" alt="didier" height="35" width ="35"> (s191675)
 
 - <https://github.com/paulseghers>
 
 ## TODO (non-obvious things we might forget)
-- auto dowload the `.bz2` from kaggle with wget into `data/raw`
+- pytest
+- fix dataloading and saving problems
 - create wrapper functions for code blocks that might be used twice
 - add docstrings to wrapper functions for better documentability of what's going on
+
 ### Week 1
 - [x] Create a git repository
 - [x] Make sure that all team members have write access to the github repository
