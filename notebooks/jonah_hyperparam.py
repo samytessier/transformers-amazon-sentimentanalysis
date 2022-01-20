@@ -14,15 +14,15 @@ def tokenize_function(examples):
     return tokenizer(examples["content"], padding="max_length", truncation=True)
 
 
-small_train_dataset = dataset["train"].shuffle(seed=42).select(range(300)) 
-small_eval_dataset = dataset["test"].shuffle(seed=42).select(range(50)) 
+small_train_dataset = dataset["train"].shuffle(seed=42).select(range(100)) 
+small_eval_dataset = dataset["test"].shuffle(seed=42).select(range(10)) 
 
 tokenized_small_train_dataset = small_train_dataset.map(tokenize_function, batched=True)
 tokenized_small_eval_dataset = small_eval_dataset.map(tokenize_function, batched=True)
 
 def model_init():
     return AutoModelForSequenceClassification.from_pretrained(
-        'distilbert-base-uncased', return_dict=True)
+        'data/checkpoint-6000', local_files_only=True ,return_dict=True)
 
 def compute_metrics(eval_pred):
     predictions, labels = eval_pred
@@ -33,7 +33,7 @@ def compute_metrics(eval_pred):
 # than the default to be able to prune bad trials early.
 # Disabling tqdm is a matter of preference.
 training_args = TrainingArguments(
-    "test", evaluation_strategy="steps", eval_steps=50, disable_tqdm=True)
+    "test", evaluation_strategy="steps", eval_steps=50, disable_tqdm=False, report_to="wandb")
 trainer = Trainer(
     args=training_args,
     tokenizer=tokenizer,
@@ -51,3 +51,5 @@ trainer.hyperparameter_search(
     n_trials=3,
     resources_per_trial={"cpu": 8} # number of trials
 )
+
+trainer.save_model('models/trained_model_hyper')
