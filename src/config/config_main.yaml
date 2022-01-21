@@ -6,8 +6,8 @@ save_path: "/models/mnist_classifier.pt" #given wrp to /src
 same_data_size_everywhere: True #
 
 common:
-  size_train: 3000
-  size_val: 1700
+  size_train: 1000
+  size_val: 100
 ### config for training ###
 train:
   hyperparameters:
