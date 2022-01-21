@@ -26,8 +26,11 @@ def main(cfg):
     """ Helper class that will to launch train and test functions
     expects there to be a "command" field in the config file
     """
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    log_fmt = '%(asctime)s - %(name)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_fmt)
+    if cfg.small:
+        log.warning("currently building dataset in smol mode. ")
+        log.warning("prefer changing the sizes in src/config/config_main.yaml and run regular `make data` if you plan on doing more than just testing with this")
     try: 
         globals()[cfg.command]
     except AttributeError:

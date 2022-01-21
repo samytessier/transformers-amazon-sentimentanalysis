@@ -17,8 +17,8 @@ def run_download(C):
     size_val = C.common.size_val if C.same_data_size_everywhere else cfg.size_val
     size_train = C.common.size_train if C.same_data_size_everywhere else cfg.size_train
 
-    logger = logging.getLogger(__name__)
-    logger.info("params ok. download starting...")
+    log = logging.getLogger(__name__)
+    log.info("params ok. download starting...")
     #call data part now
     try:
         dataset = load_dataset('amazon_polarity')
@@ -31,7 +31,7 @@ def run_download(C):
     train_dataset.save_to_disk(original_path+output_filepath + '/train_dataset_size_%s' % size_train)
     eval_dataset.save_to_disk(original_path+output_filepath + '/eval_dataset_size_%s' % size_val)
     
-    logger.info("successfully saved train and test sets in {}".format(output_filepath))
+    log.info("successfully saved train and test sets in {}".format(output_filepath))
 
 
 #from pathlib import Path

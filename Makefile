@@ -29,9 +29,30 @@ requirements: test_environment
 data_download:
 	$(PYTHON_INTERPRETER) src/main.py command=run_download
 
-## Make Dataset
-data:
+## proces Dataset
+data_prepare:
 	$(PYTHON_INTERPRETER) src/main.py command=process_data
+
+## make dataset from scratch
+data:
+	$(PYTHON_INTERPRETER) src/main.py command=run_download
+	$(PYTHON_INTERPRETER) src/main.py command=process_data
+
+## make smaller  dataset
+smalldata:
+	$(PYTHON_INTERPRETER) src/main.py command=run_download\
+	 same_data_size_everywhere=True \
+	 small=True \
+	 common.size_train=50 \
+	 common.size_val=10
+	$(PYTHON_INTERPRETER) src/main.py command=process_data \
+	common.size_train=50 \
+	common.size_val=10
+
+evalsmall:
+	$(PYTHON_INTERPRETER) src/main.py command=eval_transformer \
+	common.size_train=50 \
+	common.size_val=10
 
 ## Train
 train: 

@@ -20,16 +20,16 @@ def process_data(C):
     input_filepath, output_filepath = og_fpath+cfg.input_filepath,\
      og_fpath+cfg.output_filepath
 
-    logger = logging.getLogger(__name__)
-    logger.info('Tokenize data set from transformers data')
+    log = logging.getLogger(__name__)
+    log.info('Tokenize data set from transformers data')
 
     try:
         train_dataset = load_from_disk(input_filepath + '/train_dataset_size_%s' % size_train)
         eval_dataset = load_from_disk(input_filepath + '/eval_dataset_size_%s' % size_val)
     except FileNotFoundError:
         print("file not found - has make data_download been run already? \n check logs for more info")
-        logger.error("aborted because file not found. likely because `make data_download` has not yet been run or bad path and sizes provided")
-        logger.error("exiting")
+        log.error("aborted because file not found. likely because `make data_download` has not yet been run or bad path and sizes provided")
+        log.error("exiting")
         exit(1)
     tokenized_train_dataset = train_dataset.map(tokenize_function, batched=True)
     tokenized_eval_dataset = eval_dataset.map(tokenize_function, batched=True)
@@ -37,7 +37,7 @@ def process_data(C):
     tokenized_train_dataset.save_to_disk(output_filepath + '/train_processed_size_%s' % size_train)
     tokenized_eval_dataset.save_to_disk(output_filepath + '/eval_processed_size_%s' % size_val)
 
-    logger.info("\n successfuly processed data to {}".format(cfg.output_filepath))
+    log.info("\n successfuly processed data to {}".format(cfg.output_filepath))
 
 def tokenize_function(examples):
     tokenizer = AutoTokenizer.from_pretrained('bert-base-cased')

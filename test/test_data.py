@@ -21,14 +21,14 @@ def test_on_datasets_len():
 	assert len(trainset) == N_train, "length of dataset should be == {}".format(N_train)
 	assert len(evalset) == N_test, "length of dataset should be == {}".format(N_train)
 
-#@pytest.mark.skipif(not os.path.exists(_PATH_DATA+"/processed/"), reason="Data files not found")
+@pytest.mark.skipif(not os.path.exists(_PATH_DATA+"/processed/"), reason="Data files not found")
 def test_well_constructed():
 	"""
 	check if the training dataset has everything we need
 	"""
 	needed_features = {'content', 'input_ids', 'label', 'title'}
 	assert needed_features.issubset(set(trainset.features.keys())), "all necessary features should be present in dataset"
-
+@pytest.mark.skipif(not os.path.exists(_PATH_DATA+"/processed/"), reason="Data files not found")
 def test_all_labels_present():
 	for i in range(2): #labels are digits 1 or 0
 		t = 2 #

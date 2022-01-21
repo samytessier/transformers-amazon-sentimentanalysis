@@ -102,3 +102,9 @@ notebooks/checkpoint-6000/
 !data/*.dvc
 
 /wandb
+
+#pytest
+.pytest_cache/
+
+#ban absolute chonker of a boi
+models/checkpoint-6000/
