@@ -14,7 +14,8 @@ from transformers import TrainingArguments
 from transformers import Trainer
 from transformers import DataCollatorWithPadding
 from transformers import AutoTokenizer
-
+wandb.login()
+#wandb.init(project='second-run',entity='thejproject')
 
 def eval_transformer(C):
     print("Predict day and night")
@@ -30,13 +31,20 @@ def eval_transformer(C):
     eval_dataset = load_from_disk(data_filepath + '/eval_processed_size_%s' % size_val)
 
     print("config ok, setting up W&B...")
-    wandb.init(project='trial-run',entity='mlops-group9')
+    #wandb.init(project='trial-run',entity='mlops-group9')
 
     model = AutoModelForSequenceClassification.from_pretrained(model_filepath + '/checkpoint-6000',local_files_only=True)
     training_args = TrainingArguments("test_trainer",
         report_to="wandb",  # enable logging to W&B
-        run_name="bert-test"  # name of the W&B run (optional)
-        )
+        run_name="bert-test",  # name of the W&B run (optional)
+        evaluation_strategy="epoch",
+        logging_steps=100,
+        learning_rate=2e-5,
+        per_device_train_batch_size=16,
+        per_device_eval_batch_size=16,
+        num_train_epochs=3,
+        weight_decay=0.01,
+    )
     tokenizer = AutoTokenizer.from_pretrained('bert-base-cased')
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
     trainer = Trainer(
