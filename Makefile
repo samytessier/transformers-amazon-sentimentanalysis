@@ -61,6 +61,11 @@ train:
 evaluate:
 	$(PYTHON_INTERPRETER) src/main.py command=eval_transformer
 
+##params
+hyperparam_sweep: 
+	$(PYTHON_INTERPRETER) src/main.py --multirun command=eval_transformer \
+	eval_transformer.hyperparameters.learning_rate=2.0e-5,4.0e-5,3.0e-4 \
+	eval_transformer.hyperparameters.weight_decay=0.069,0.02,0.4
 ## Delete all compiled Python files
 clean:
 	find . -type f -name "*.py[co]" -delete

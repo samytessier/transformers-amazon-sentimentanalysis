@@ -80,6 +80,7 @@ target/
 
 # exclude all the poo poo logs and stuff hydra writes
 outputs/
+multirun/
 
 
 # Mac OS-specific storage files
