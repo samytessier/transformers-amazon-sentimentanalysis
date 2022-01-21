@@ -1,6 +1,5 @@
 import os	
 import pytest
-from random import randint 
 
 from test import _PATH_DATA
 from datasets import load_from_disk #run with `pytest -W ignore::DeprecationWarning` 
@@ -29,10 +28,6 @@ def test_well_constructed():
 	"""
 	needed_features = {'content', 'input_ids', 'label', 'title'}
 	assert needed_features.issubset(set(trainset.features.keys())), "all necessary features should be present in dataset"
-
-#def observations_same_size():
-#	randidx_train, randidx_test = randint(0, N_train), randint(0, N_test)
-
 
 def test_all_labels_present():
 	for i in range(2): #labels are digits 1 or 0
