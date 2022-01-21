@@ -13,6 +13,7 @@ from dotenv import find_dotenv, load_dotenv
 import wandb
 
 def train_transformer(C):
+    log = logging.getLogger(__name__)
     cfg = C.train_transformer
     og_fpath = get_original_cwd()
     input_filepath, output_filepath = og_fpath+cfg.input_filepath,\
@@ -24,9 +25,10 @@ def train_transformer(C):
         wandb.init(project='trial-run',entity='mlops-group9')
         use_wandb = True
     except AssertionError:
+        log.warning("wandb not logged-in, proceeding withtout.\n")
         use_wandb = False
 
-    print("Training transformers day and night")
+    log.info("Training transformers day and night")
     train_dataset = load_from_disk(input_filepath + '/train_processed_size_%s' % size_train)
     eval_dataset = load_from_disk(input_filepath + '/eval_processed_size_%s' % size_val)
 
@@ -46,15 +48,6 @@ def train_transformer(C):
         )
     trainer.train()
     trainer.save_model(output_filepath + 'trained_model')
-
+    log.info("succesfully save mode to {}".format(output_filepath + 'trained_model'))
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
-    # not used in this stub but often useful for finding various files
-
-
-    # find .env automagically by walking up directories until it's found, then
-    # load up the .env entries as environment variables
-    load_dotenv(find_dotenv())
-
-    main()
+    pass #idk

@@ -1,22 +1,17 @@
+didier: True #for raccoon energy
+
 ### general stuff ###
 
 command: "run_download"
 use_gpu: False
 save_path: "/models/mnist_classifier.pt" #given wrp to /src
 same_data_size_everywhere: True #
+small: False
 
 common:
   size_train: 1000
   size_val: 100
-### config for training ###
-train:
-  hyperparameters:
-    lr: 0.004
-    epochs: 24
-    batch_size: 64
-  criterion: "NLLLoss" #must be named exactly as in torch.nn.
-  optimizer: "Adam"
-  save_path: ${save_path} 
+
 
 ### config for training cnn###
 train_cnn:
@@ -37,6 +32,15 @@ train_transformer:
  output_filepath: /models
  size_train: 70
  size_val: 30
+ hyperparameters:
+  evaluation_strategy: "epoch"
+  logging_steps: 100
+  learning_rate: 2.0e-5
+  per_device_train_batch_size: 16
+  per_device_eval_batch_size: 16
+  num_train_epochs: 3
+  weight_decay: 0.01
+
 
 ### config for predicting huggingface ###
 eval_transformer:
@@ -44,7 +48,14 @@ eval_transformer:
   model_filepath: "/models"
   size_train: 70
   size_val: 30
-
+  hyperparameters:
+    evaluation_strategy: "epoch"
+    logging_steps: 100
+    learning_rate: 2.0e-5
+    per_device_train_batch_size: 16
+    per_device_eval_batch_size: 16
+    num_train_epochs: 3
+    weight_decay: 0.01
 ### config for loading processed data ###
 process_data:
   size_train: 70
@@ -57,3 +68,8 @@ run_download:
   size_train: 70
   size_val: 30
   output_filepath: "/data/raw"
+
+### hydra config ###
+defaults:  
+  - override hydra/job_logging: colorlog  
+  - override hydra/hydra_logging: colorlog
